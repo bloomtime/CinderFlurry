@@ -3,12 +3,14 @@
 #include "FlurryAPI.h"
 
 #include <string>
+#include <sstream>
 #include <ostream>
 #include <map>
 
 using std::string;
 using std::map;
 
+std::string i_to_string(int i);
 
 namespace pollen { namespace flurry {
 
