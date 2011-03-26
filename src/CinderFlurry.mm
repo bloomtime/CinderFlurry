@@ -24,6 +24,7 @@ namespace pollen { namespace flurry {
 
     void Flurry::init(string app_id) {
 		NSSetUncaughtExceptionHandler(&pollen::flurry::uncaughtExceptionHandler);
+        [FlurryAPI setSessionReportsOnPauseEnabled:YES];
 		[FlurryAPI startSession:string2NSString(app_id)];
 	}
     
