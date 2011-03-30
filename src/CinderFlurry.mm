@@ -43,7 +43,7 @@ namespace pollen { namespace flurry {
         [invocation setSelector:@selector(logEvent:withParameters:)];
         [invocation setArgument:string2NSString(eventName) atIndex:0];
         [invocation setArgument:params atIndex:1];
-        [invocation performSelectorOnMainThread:@selector(invoke:) withObject:Nil waitUntilDone:false];
+        [invocation performSelectorOnMainThread:@selector(invoke) withObject:Nil waitUntilDone:false];
 
 //		[FlurryAPI logEvent:string2NSString(eventName) withParameters: params];
 	}	
@@ -55,7 +55,7 @@ namespace pollen { namespace flurry {
         [invocation setArgument:string2NSString(eventName) atIndex:0];
         BOOL wait = YES;
         [invocation setArgument:&wait atIndex:1];
-        [invocation performSelectorOnMainThread:@selector(invoke:) withObject:Nil waitUntilDone:false];
+        [invocation performSelectorOnMainThread:@selector(invoke) withObject:Nil waitUntilDone:false];
         
 //		[FlurryAPI logEvent:string2NSString(eventName) timed:TRUE];
 	}	
@@ -72,7 +72,7 @@ namespace pollen { namespace flurry {
         [invocation setArgument:params atIndex:1];
         BOOL wait = YES;
         [invocation setArgument:&wait atIndex:2];
-        [invocation performSelectorOnMainThread:@selector(invoke:) withObject:Nil waitUntilDone:false];
+        [invocation performSelectorOnMainThread:@selector(invoke) withObject:Nil waitUntilDone:false];
         
 //		[FlurryAPI logEvent:string2NSString(eventName) withParameters: params timed:TRUE];
 	}	
@@ -83,7 +83,7 @@ namespace pollen { namespace flurry {
         [invocation setSelector:@selector(endTimedEvent:withParameters:)];
         [invocation setArgument:string2NSString(eventName) atIndex:0];
         [invocation setArgument:[[NSMutableDictionary alloc] init] atIndex:1];
-        [invocation performSelectorOnMainThread:@selector(invoke:) withObject:Nil waitUntilDone:false];
+        [invocation performSelectorOnMainThread:@selector(invoke) withObject:Nil waitUntilDone:false];
 
 //		[FlurryAPI endTimedEvent:string2NSString(eventName) withParameters: [[NSMutableDictionary alloc] init]];
 	}	
@@ -97,14 +97,14 @@ namespace pollen { namespace flurry {
         [invocation setTarget: [FlurryAPI class]];
         [invocation setSelector:@selector(endTimedEvent:withParameters:)];
         [invocation setArgument:string2NSString(eventName) atIndex:0];
-        [invocation setArgument:[[NSMutableDictionary alloc] init] atIndex:1];
-        [invocation performSelectorOnMainThread:@selector(invoke:) withObject:Nil waitUntilDone:false];
+        [invocation setArgument:nil atIndex:1];
+        [invocation performSelectorOnMainThread:@selector(invoke) withObject:Nil waitUntilDone:false];
         
 //		[FlurryAPI endTimedEvent:string2NSString(eventName) withParameters: params];
 	}	
     
     void Flurry::incrementActivity() {
-        [[FlurryAPI class] performSelectorOnMainThread:@selector(logPageView:) withObject: nil waitUntilDone:false];
+        [[FlurryAPI class] performSelectorOnMainThread:@selector(logPageView) withObject: nil waitUntilDone:false];
 	}	
 	
 	void setUserId(string userId) {
