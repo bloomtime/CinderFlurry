@@ -18,7 +18,7 @@ class Flurry {
 private:
 	Flurry() {};
     Flurry(Flurry& ) {};
-    Flurry& operator=(Flurry const&) {};
+//    Flurry& operator=(Flurry const&) { };
     ~Flurry() {};
 	static Flurry *flurry;
 public:
