@@ -1,17 +1,10 @@
 #include "CinderFlurry.h"
 
-std::string i_to_string(int i)
-{
-    std::stringstream ss;
-    std::string s;
-    ss << i;
-    s = ss.str();
-    
-    return s;
-}
-
+using std::map;
+using std::string;
 
 namespace pollen { namespace flurry {
+    
 	Flurry*	Flurry::flurry = 0;
 
     NSString* string2NSString(string str) {
@@ -32,9 +25,9 @@ namespace pollen { namespace flurry {
         [[FlurryAPI class] performSelectorOnMainThread:@selector(logEvent:) withObject: string2NSString(eventName) waitUntilDone:false];
 	}	
     
-    void Flurry::logEvent(const string &eventName, const std::map<string, string> &parameters) {
+    void Flurry::logEvent(const string &eventName, const map<string, string> &parameters) {
         NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-        for (std::map<string, string>::const_iterator iter = parameters.begin(); iter != parameters.end(); iter++) {
+        for (map<string, string>::const_iterator iter = parameters.begin(); iter != parameters.end(); iter++) {
             [params setObject: string2NSString(iter->first) forKey: string2NSString(iter->second) ];
         }
         
@@ -60,9 +53,9 @@ namespace pollen { namespace flurry {
 //		[FlurryAPI logEvent:string2NSString(eventName) timed:TRUE];
 	}	
     
-    void Flurry::startTimeEvent(const string &eventName, const std::map<string, string> &parameters) {
+    void Flurry::startTimeEvent(const string &eventName, const map<string, string> &parameters) {
         NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-        for (std::map<string, string>::const_iterator iter = parameters.begin(); iter != parameters.end(); iter++) {
+        for (map<string, string>::const_iterator iter = parameters.begin(); iter != parameters.end(); iter++) {
             [params setObject: string2NSString(iter->first) forKey: string2NSString(iter->second) ];
         }
         NSInvocation *invocation = [[NSInvocation alloc] init];
@@ -89,9 +82,9 @@ namespace pollen { namespace flurry {
 //		[FlurryAPI endTimedEvent:string2NSString(eventName) withParameters: [[NSMutableDictionary alloc] init]];
 	}	
     
-    void Flurry::stopTimeEvent(const string &eventName, const std::map<string, string> &parameters) {
+    void Flurry::stopTimeEvent(const string &eventName, const map<string, string> &parameters) {
         NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-        for (std::map<string, string>::const_iterator iter = parameters.begin(); iter != parameters.end(); iter++) {
+        for (map<string, string>::const_iterator iter = parameters.begin(); iter != parameters.end(); iter++) {
             [params setObject: string2NSString(iter->first) forKey: string2NSString(iter->second) ];
         }
         NSInvocation *invocation = [[NSInvocation alloc] init];
@@ -113,7 +106,6 @@ namespace pollen { namespace flurry {
 	}
 
 	void setAge(const int &age) {
-        
 		[FlurryAPI setAge: age];
 	}
 	

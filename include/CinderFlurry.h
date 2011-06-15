@@ -7,11 +7,6 @@
 #include <ostream>
 #include <map>
 
-using std::string;
-using std::map;
-
-std::string i_to_string(int i);
-
 namespace pollen { namespace flurry {
 
 class Flurry {
@@ -29,20 +24,20 @@ public:
 		return flurry;
 	}
 	
-	void init(const string &app_id);
-    void logEvent(const string &eventName);
-	void logEvent(const string &eventName, const std::map<string, string> &parameters);
+	void init(const std::string &app_id);
+    void logEvent(const std::string &eventName);
+	void logEvent(const std::string &eventName, const std::map<std::string, std::string> &parameters);
 	
-	void startTimeEvent(const string &eventName);
-	void startTimeEvent(const string &eventName, const std::map<string, string> &parameters);
-	void stopTimeEvent(const string &eventName);
-	void stopTimeEvent(const string &eventNAme, const std::map<string, string> &parameters);	
+	void startTimeEvent(const std::string &eventName);
+	void startTimeEvent(const std::string &eventName, const std::map<std::string, std::string> &parameters);
+	void stopTimeEvent(const std::string &eventName);
+	void stopTimeEvent(const std::string &eventNAme, const std::map<std::string, std::string> &parameters);	
 
 	void incrementActivity();
 
-	void setUserId(const string &userId);
+	void setUserId(const std::string &userId);
 	void setAge(const int &age);
-	void setGender(const string &gender);
+	void setGender(const std::string &gender);
 
 	void setLatitude( const double &latitude, 
                       const double &longitude, 
