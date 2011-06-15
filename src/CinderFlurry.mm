@@ -22,19 +22,19 @@ namespace pollen { namespace flurry {
         [FlurryAPI logError:@"Uncaught" message:@"Crash!" exception:exception];
     }
 
-    void Flurry::init(string app_id) {
+    void Flurry::init(const string &app_id) {
 		NSSetUncaughtExceptionHandler(&pollen::flurry::uncaughtExceptionHandler);
         [FlurryAPI setSessionReportsOnPauseEnabled:YES];
 		[FlurryAPI startSession:string2NSString(app_id)];
 	}
     
-    void Flurry::logEvent(string eventName) {
+    void Flurry::logEvent(const string &eventName) {
         [[FlurryAPI class] performSelectorOnMainThread:@selector(logEvent:) withObject: string2NSString(eventName) waitUntilDone:false];
 	}	
     
-    void Flurry::logEvent(string eventName, std::map<string, string>& parameters) {
+    void Flurry::logEvent(const string &eventName, const std::map<string, string> &parameters) {
         NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-        for (std::map<string, string>::iterator iter = parameters.begin(); iter != parameters.end(); iter++) {
+        for (std::map<string, string>::const_iterator iter = parameters.begin(); iter != parameters.end(); iter++) {
             [params setObject: string2NSString(iter->first) forKey: string2NSString(iter->second) ];
         }
         
@@ -48,7 +48,7 @@ namespace pollen { namespace flurry {
 //		[FlurryAPI logEvent:string2NSString(eventName) withParameters: params];
 	}	
 
-    void Flurry::startTimeEvent(string eventName) {
+    void Flurry::startTimeEvent(const string &eventName) {
         NSInvocation *invocation = [[NSInvocation alloc] init];
         [invocation setTarget: [FlurryAPI class]];
         [invocation setSelector:@selector(logEvent:timed:)];
@@ -60,9 +60,9 @@ namespace pollen { namespace flurry {
 //		[FlurryAPI logEvent:string2NSString(eventName) timed:TRUE];
 	}	
     
-    void Flurry::startTimeEvent(string eventName, std::map<string, string>& parameters) {
+    void Flurry::startTimeEvent(const string &eventName, const std::map<string, string> &parameters) {
         NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-        for (std::map<string, string>::iterator iter = parameters.begin(); iter != parameters.end(); iter++) {
+        for (std::map<string, string>::const_iterator iter = parameters.begin(); iter != parameters.end(); iter++) {
             [params setObject: string2NSString(iter->first) forKey: string2NSString(iter->second) ];
         }
         NSInvocation *invocation = [[NSInvocation alloc] init];
@@ -77,7 +77,7 @@ namespace pollen { namespace flurry {
 //		[FlurryAPI logEvent:string2NSString(eventName) withParameters: params timed:TRUE];
 	}	
     
-    void Flurry::stopTimeEvent(string eventName) {
+    void Flurry::stopTimeEvent(const string &eventName) {
         NSInvocation *invocation = [[NSInvocation alloc] init];
         [invocation setTarget: [FlurryAPI class]];
         [invocation setSelector:@selector(endTimedEvent:withParameters:)];
@@ -89,9 +89,9 @@ namespace pollen { namespace flurry {
 //		[FlurryAPI endTimedEvent:string2NSString(eventName) withParameters: [[NSMutableDictionary alloc] init]];
 	}	
     
-    void Flurry::stopTimeEvent(string eventName, std::map<string, string>& parameters) {
+    void Flurry::stopTimeEvent(const string &eventName, const std::map<string, string> &parameters) {
         NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-        for (std::map<string, string>::iterator iter = parameters.begin(); iter != parameters.end(); iter++) {
+        for (std::map<string, string>::const_iterator iter = parameters.begin(); iter != parameters.end(); iter++) {
             [params setObject: string2NSString(iter->first) forKey: string2NSString(iter->second) ];
         }
         NSInvocation *invocation = [[NSInvocation alloc] init];
@@ -108,20 +108,20 @@ namespace pollen { namespace flurry {
         [[FlurryAPI class] performSelectorOnMainThread:@selector(logPageView) withObject: nil waitUntilDone:false];
 	}	
 	
-	void setUserId(string userId) {
+	void setUserId(const string &userId) {
         [[FlurryAPI class] performSelectorOnMainThread:@selector(setUserID:) withObject: string2NSString(userId) waitUntilDone:false];
 	}
 
-	void setAge(int age) {
+	void setAge(const int &age) {
         
 		[FlurryAPI setAge: age];
 	}
 	
-	void setGender(string gender) {
+	void setGender(const string &gender) {
         [FlurryAPI performSelectorOnMainThread:@selector(setGender:) withObject: string2NSString(gender) waitUntilDone:false];
 	}
 
-	void setLocation(double latitude, double longitude, float horizontalAccuracy, float verticalAccuracy) {
+	void setLocation(const double &latitude, const double &longitude, const float &horizontalAccuracy, const float &verticalAccuracy) {
 		[FlurryAPI setLatitude: latitude longitude: longitude horizontalAccuracy: horizontalAccuracy verticalAccuracy: verticalAccuracy];
 	}
 }}

@@ -29,22 +29,25 @@ public:
 		return flurry;
 	}
 	
-	void init(string app_id);
-    void logEvent(string eventName);
-	void logEvent(string eventName, std::map<string, string>& parameters);
+	void init(const string &app_id);
+    void logEvent(const string &eventName);
+	void logEvent(const string &eventName, const std::map<string, string> &parameters);
 	
-	void startTimeEvent(string eventName);
-	void startTimeEvent(string eventName, std::map<string, string>& parameters);
-	void stopTimeEvent(string eventName);
-	void stopTimeEvent(string eventNAme, std::map<string, string>& parameters);	
+	void startTimeEvent(const string &eventName);
+	void startTimeEvent(const string &eventName, const std::map<string, string> &parameters);
+	void stopTimeEvent(const string &eventName);
+	void stopTimeEvent(const string &eventNAme, const std::map<string, string> &parameters);	
 
 	void incrementActivity();
 
-	void setUserId(string userId);
-	void setAge(int age);
-	void setGender(string gender);
+	void setUserId(const string &userId);
+	void setAge(const int &age);
+	void setGender(const string &gender);
 
-	void setLatitude(double latitude, double longitude, float horizontalAccuracy, float verticalAccuracy);
+	void setLatitude( const double &latitude, 
+                      const double &longitude, 
+                      const float &horizontalAccuracy, 
+                      const float &verticalAccuracy );
 };
 
 }}
