@@ -32,17 +32,21 @@ namespace pollen { namespace flurry {
         }
         
         NSInvocation *invocation = [[NSInvocation alloc] init];
+        [invocation retainArguments];
         [invocation setTarget: [FlurryAPI class]];
         [invocation setSelector:@selector(logEvent:withParameters:)];
         [invocation setArgument:string2NSString(eventName) atIndex:0];
         [invocation setArgument:params atIndex:1];
         [invocation performSelectorOnMainThread:@selector(invoke) withObject:Nil waitUntilDone:false];
-
+        
+        [params release];
+        
 //		[FlurryAPI logEvent:string2NSString(eventName) withParameters: params];
 	}	
 
     void Flurry::startTimeEvent(const string &eventName) {
         NSInvocation *invocation = [[NSInvocation alloc] init];
+        [invocation retainArguments];        
         [invocation setTarget: [FlurryAPI class]];
         [invocation setSelector:@selector(logEvent:timed:)];
         [invocation setArgument:string2NSString(eventName) atIndex:0];
@@ -59,6 +63,7 @@ namespace pollen { namespace flurry {
             [params setObject: string2NSString(iter->first) forKey: string2NSString(iter->second) ];
         }
         NSInvocation *invocation = [[NSInvocation alloc] init];
+        [invocation retainArguments];        
         [invocation setTarget: [FlurryAPI class]];
         [invocation setSelector:@selector(logEvent:withParameters:timed:)];
         [invocation setArgument:string2NSString(eventName) atIndex:0];
@@ -66,12 +71,15 @@ namespace pollen { namespace flurry {
         BOOL wait = YES;
         [invocation setArgument:&wait atIndex:2];
         [invocation performSelectorOnMainThread:@selector(invoke) withObject:Nil waitUntilDone:false];
-        
+
+        [params release];
+                
 //		[FlurryAPI logEvent:string2NSString(eventName) withParameters: params timed:TRUE];
 	}	
     
     void Flurry::stopTimeEvent(const string &eventName) {
         NSInvocation *invocation = [[NSInvocation alloc] init];
+        [invocation retainArguments];        
         [invocation setTarget: [FlurryAPI class]];
         [invocation setSelector:@selector(endTimedEvent:withParameters:)];
         [invocation setArgument:string2NSString(eventName) atIndex:0];
@@ -88,11 +96,14 @@ namespace pollen { namespace flurry {
             [params setObject: string2NSString(iter->first) forKey: string2NSString(iter->second) ];
         }
         NSInvocation *invocation = [[NSInvocation alloc] init];
+        [invocation retainArguments];        
         [invocation setTarget: [FlurryAPI class]];
         [invocation setSelector:@selector(endTimedEvent:withParameters:)];
         [invocation setArgument:string2NSString(eventName) atIndex:0];
         [invocation setArgument:params atIndex:1];
         [invocation performSelectorOnMainThread:@selector(invoke) withObject:Nil waitUntilDone:false];
+
+        [params release];
         
 //		[FlurryAPI endTimedEvent:string2NSString(eventName) withParameters: params];
 	}	
@@ -101,19 +112,19 @@ namespace pollen { namespace flurry {
         [[FlurryAPI class] performSelectorOnMainThread:@selector(logPageView) withObject: nil waitUntilDone:false];
 	}	
 	
-	void setUserId(const string &userId) {
+	void Flurry::setUserId(const string &userId) {
         [[FlurryAPI class] performSelectorOnMainThread:@selector(setUserID:) withObject: string2NSString(userId) waitUntilDone:false];
 	}
 
-	void setAge(const int &age) {
+	void Flurry::setAge(const int &age) {
 		[FlurryAPI setAge: age];
 	}
 	
-	void setGender(const string &gender) {
+	void Flurry::setGender(const string &gender) {
         [FlurryAPI performSelectorOnMainThread:@selector(setGender:) withObject: string2NSString(gender) waitUntilDone:false];
 	}
 
-	void setLocation(const double &latitude, const double &longitude, const float &horizontalAccuracy, const float &verticalAccuracy) {
+	void Flurry::setLocation(const double &latitude, const double &longitude, const float &horizontalAccuracy, const float &verticalAccuracy) {
 		[FlurryAPI setLatitude: latitude longitude: longitude horizontalAccuracy: horizontalAccuracy verticalAccuracy: verticalAccuracy];
 	}
 }}

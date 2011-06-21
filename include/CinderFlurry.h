@@ -39,7 +39,7 @@ public:
 	void setAge(const int &age);
 	void setGender(const std::string &gender);
 
-	void setLatitude( const double &latitude, 
+	void setLocation( const double &latitude, 
                       const double &longitude, 
                       const float &horizontalAccuracy, 
                       const float &verticalAccuracy );
