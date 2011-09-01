@@ -8,6 +8,7 @@ namespace pollen { namespace flurry {
 	Flurry*	Flurry::flurry = 0;
 
     NSString* string2NSString(string str) {
+        // TODO: we might want UTF8 here and we might want to do initWith and release manually
         return [NSString stringWithCString:str.c_str() encoding:[NSString defaultCStringEncoding]];
     }
     
