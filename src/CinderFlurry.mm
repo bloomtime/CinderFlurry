@@ -5,6 +5,11 @@ using std::map;
 using std::string;
 
 namespace bloom { namespace flurry {
+    NSString* string2NSString(string str);
+    void uncaughtExceptionHandler(NSException *exception);
+} }
+
+namespace bloom { namespace flurry {
     
 	Flurry*	Flurry::flurry = 0;
 
@@ -18,7 +23,7 @@ namespace bloom { namespace flurry {
     }
 
     void Flurry::init(const string &app_id) {
-		NSSetUncaughtExceptionHandler(&pollen::flurry::uncaughtExceptionHandler);
+		NSSetUncaughtExceptionHandler(&bloom::flurry::uncaughtExceptionHandler);
         [FlurryAnalytics setSessionReportsOnPauseEnabled:YES];
 		[FlurryAnalytics startSession:string2NSString(app_id)];
 	}
