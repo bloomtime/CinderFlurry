@@ -1,13 +1,11 @@
 #pragma once
 
-#include "FlurryAnalytics.h"
-
 #include <string>
 #include <sstream>
 #include <ostream>
 #include <map>
 
-namespace pollen { namespace flurry {
+namespace bloom { namespace flurry {
 
 class Flurry {
 private:
@@ -45,4 +43,4 @@ public:
                       const float &verticalAccuracy );
 };
 
-}}
+} } // namespacen

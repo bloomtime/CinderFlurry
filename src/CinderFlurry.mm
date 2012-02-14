@@ -1,9 +1,10 @@
 #include "CinderFlurry.h"
+#import "FlurryAnalytics.h"
 
 using std::map;
 using std::string;
 
-namespace pollen { namespace flurry {
+namespace bloom { namespace flurry {
     
 	Flurry*	Flurry::flurry = 0;
 
@@ -128,4 +129,5 @@ namespace pollen { namespace flurry {
 	void Flurry::setLocation(const double &latitude, const double &longitude, const float &horizontalAccuracy, const float &verticalAccuracy) {
 		[FlurryAnalytics setLatitude: latitude longitude: longitude horizontalAccuracy: horizontalAccuracy verticalAccuracy: verticalAccuracy];
 	}
-}}
+    
+} } // namespacen
