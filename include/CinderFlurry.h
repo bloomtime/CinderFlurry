@@ -1,6 +1,6 @@
 #pragma once
 
-#include "FlurryAPI.h"
+#include "FlurryAnalytics.h"
 
 #include <string>
 #include <sstream>
